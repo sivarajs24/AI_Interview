@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1500" viewBox="0 0 1900 1500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2f5e2f" />
+    </marker>
+    <style>
+      .title { font: 700 46px 'Segoe UI', Arial, sans-serif; fill: #2f5e2f; }
+      .subtitle { font: 500 22px 'Segoe UI', Arial, sans-serif; fill: #3f6d3f; }
+      .phase { fill: #f3f9ef; stroke: #bfd9b9; stroke-width: 2; }
+      .phaseText { font: 600 22px 'Segoe UI', Arial, sans-serif; fill: #336233; }
+      .box { fill: #e8f3e3; stroke: #5b8f5a; stroke-width: 2; }
+      .boxAlt { fill: #f8fcf5; stroke: #5b8f5a; stroke-width: 2; }
+      .text { font: 600 20px 'Segoe UI', Arial, sans-serif; fill: #1f3d1f; }
+      .small { font: 500 18px 'Segoe UI', Arial, sans-serif; fill: #1f3d1f; }
+      .legend { font: 500 16px 'Segoe UI', Arial, sans-serif; fill: #365f36; }
+      .arrow { stroke: #2f5e2f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #2f5e2f; stroke-width: 2.5; stroke-dasharray: 8 6; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1900" height="1500" fill="#ffffff"/>
+  <text x="950" y="64" text-anchor="middle" class="title">AI Interview Workflow Diagram</text>
+  <text x="950" y="96" text-anchor="middle" class="subtitle">Detailed End-to-End Flow (Frontend + Backend + AI Modules)</text>
+
+  <rect class="phase" x="70" y="130" width="1760" height="310" rx="14"/>
+  <text class="phaseText" x="95" y="165">Phase 1: Session Initialization</text>
+
+  <rect class="phase" x="70" y="470" width="1760" height="360" rx="14"/>
+  <text class="phaseText" x="95" y="505">Phase 2: Question Loop and Response Capture</text>
+
+  <rect class="phase" x="70" y="860" width="1760" height="330" rx="14"/>
+  <text class="phaseText" x="95" y="895">Phase 3: AI Analysis and Scoring</text>
+
+  <rect class="phase" x="70" y="1210" width="1760" height="220" rx="14"/>
+  <text class="phaseText" x="95" y="1245">Phase 4: Report Delivery and Completion</text>
+
+  <rect class="box" x="820" y="180" width="260" height="56" rx="12"/>
+  <text class="text" x="950" y="215" text-anchor="middle">Start</text>
+
+  <rect class="boxAlt" x="610" y="260" width="680" height="64" rx="12"/>
+  <text class="text" x="950" y="300" text-anchor="middle">User Enters Name and Target Role (UI Form)</text>
+
+  <rect class="box" x="610" y="350" width="680" height="64" rx="12"/>
+  <text class="text" x="950" y="390" text-anchor="middle">POST /api/start-session (app.py)</text>
+
+  <rect class="boxAlt" x="200" y="550" width="500" height="72" rx="12"/>
+  <text class="small" x="450" y="579" text-anchor="middle">InterviewEngine Creates session_id</text>
+  <text class="small" x="450" y="605" text-anchor="middle">and initializes question list</text>
+
+  <rect class="boxAlt" x="750" y="550" width="500" height="72" rx="12"/>
+  <text class="small" x="1000" y="579" text-anchor="middle">QwenInterviewer Generates</text>
+  <text class="small" x="1000" y="605" text-anchor="middle">role-specific questions (N)</text>
+
+  <rect class="boxAlt" x="1300" y="550" width="500" height="72" rx="12"/>
+  <text class="small" x="1550" y="579" text-anchor="middle">Frontend Displays Question i</text>
+  <text class="small" x="1550" y="605" text-anchor="middle">and starts response timer</text>
+
+  <rect class="box" x="470" y="670" width="960" height="70" rx="12"/>
+  <text class="text" x="950" y="713" text-anchor="middle">Browser Captures Audio + Video (recorder.js)</text>
+
+  <rect class="boxAlt" x="470" y="760" width="960" height="70" rx="12"/>
+  <text class="text" x="950" y="803" text-anchor="middle">POST /api/upload-response with media files for Question i</text>
+
+  <rect class="box" x="470" y="930" width="960" height="68" rx="12"/>
+  <text class="text" x="950" y="973" text-anchor="middle">Server Saves Files in uploads/session_id/question_i</text>
+
+  <rect class="boxAlt" x="110" y="1030" width="540" height="90" rx="12"/>
+  <text class="small" x="380" y="1062" text-anchor="middle">WhisperTranscriber</text>
+  <text class="small" x="380" y="1088" text-anchor="middle">Audio -> Transcript</text>
+
+  <rect class="boxAlt" x="680" y="1030" width="540" height="90" rx="12"/>
+  <text class="small" x="950" y="1062" text-anchor="middle">SentimentAnalyzer</text>
+  <text class="small" x="950" y="1088" text-anchor="middle">Transcript -> Positive/Neutral/Negative</text>
+
+  <rect class="boxAlt" x="1250" y="1030" width="540" height="90" rx="12"/>
+  <text class="small" x="1520" y="1062" text-anchor="middle">FacialAnalyzer</text>
+  <text class="small" x="1520" y="1088" text-anchor="middle">Video Frames -> Emotions + Stress</text>
+
+  <rect class="box" x="470" y="1140" width="960" height="70" rx="12"/>
+  <text class="text" x="950" y="1183" text-anchor="middle">ReportGenerator Merges Metrics (confidence, stress, sentiment)</text>
+
+  <rect class="boxAlt" x="470" y="1270" width="960" height="70" rx="12"/>
+  <text class="text" x="950" y="1313" text-anchor="middle">Check Remaining Questions: if yes -> next question loop</text>
+
+  <rect class="box" x="470" y="1360" width="960" height="70" rx="12"/>
+  <text class="text" x="950" y="1403" text-anchor="middle">POST /api/finish-interview -> Final JSON + PDF Report</text>
+
+  <rect class="boxAlt" x="1460" y="1360" width="320" height="70" rx="12"/>
+  <text class="text" x="1620" y="1403" text-anchor="middle">End</text>
+
+  <path class="arrow" d="M950 236 L950 260"/>
+  <path class="arrow" d="M950 324 L950 350"/>
+  <path class="arrow" d="M950 414 L950 550"/>
+
+  <path class="arrow" d="M700 586 L750 586"/>
+  <path class="arrow" d="M1250 586 L1300 586"/>
+  <path class="arrow" d="M1550 622 L1550 670 L1430 670"/>
+
+  <path class="arrow" d="M950 740 L950 760"/>
+  <path class="arrow" d="M950 830 L950 930"/>
+
+  <path class="arrow" d="M900 998 L420 1030"/>
+  <path class="arrow" d="M950 998 L950 1030"/>
+  <path class="arrow" d="M1000 998 L1480 1030"/>
+
+  <path class="arrow" d="M380 1120 L820 1140"/>
+  <path class="arrow" d="M950 1120 L950 1140"/>
+  <path class="arrow" d="M1520 1120 L1080 1140"/>
+
+  <path class="arrow" d="M950 1210 L950 1270"/>
+  <path class="arrow" d="M950 1340 L950 1360"/>
+  <path class="arrow" d="M1430 1395 L1460 1395"/>
+
+  <path class="loop" d="M470 1305 L300 1305 L300 705 L470 705"/>
+  <text class="legend" x="110" y="1465">Dashed arrow indicates per-question loop until all questions are completed.</text>
+</svg>

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="interview-page section">
+    <div class="interview-header glass">
+        <div>
+            <p class="eyebrow">Live Mock Interview</p>
+            <h1>Interview Session</h1>
+            <div class="interview-meta">
+                <span class="interview-dot" aria-hidden="true"></span>
+                <span>Real-time analysis is active once you begin speaking</span>
+            </div>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-label">
+                <span id="progressText">Question 1 of 10</span>
+                <span id="categoryBadge" class="category-badge">Introduction</span>
+            </div>
+            <div class="progress-track">
+                <div id="progressBar" class="progress-fill" style="width: 10%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="interview-layout">
+        <aside class="video-panel glass">
+            <div class="webcam-wrapper">
+                <video id="webcamFeed" autoplay playsinline muted></video>
+                <span id="emotionBadge" class="emotion-badge emotion-neutral">Neutral</span>
+                <div id="recordingIndicator" class="recording-indicator hidden">
+                    <span class="pulse-dot"></span>
+                    Recording
+                </div>
+            </div>
+            <div class="video-meta">
+                <div class="metric-chip">
+                    <p>Live Emotion</p>
+                    <strong id="emotionText">Neutral</strong>
+                </div>
+                <div class="metric-chip">
+                    <p>Confidence</p>
+                    <strong id="emotionConfidence">0%</strong>
+                </div>
+            </div>
+        </aside>
+
+        <section class="qa-panel glass">
+            <div class="timer-row">
+                <span>Time Remaining</span>
+                <strong id="questionTimer">02:00</strong>
+            </div>
+
+            <article class="question-card">
+                <h2>AI Interview Question</h2>
+                <p id="questionText" class="typing-target"></p>
+            </article>
+
+            <section class="transcript-panel">
+                <div class="panel-header">
+                    <h3>Live Transcription Preview</h3>
+                    <span id="speechStatus" class="speech-status">Idle</span>
+                </div>
+                <p id="transcriptPreview" class="transcript-preview">
+                    Start speaking to see your answer preview in real time.
+                </p>
+            </section>
+
+            <section class="interim-panel">
+                <h3>Latest Analysis Snapshot</h3>
+                <div class="interim-grid">
+                    <div>
+                        <p>Sentiment</p>
+                        <strong id="interimSentiment">-</strong>
+                    </div>
+                    <div>
+                        <p>Emotion</p>
+                        <strong id="interimEmotion">-</strong>
+                    </div>
+                    <div>
+                        <p>Duration</p>
+                        <strong id="interimDuration">0s</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="interview-hints">
+                <h3>High-Score Response Tips</h3>
+                <ul>
+                    <li>Use one concise structure: context, action, measurable outcome.</li>
+                    <li>Keep a calm speaking pace and avoid trailing off at sentence ends.</li>
+                    <li>Anchor claims with examples to strengthen clarity and credibility.</li>
+                </ul>
+            </section>
+
+            <div class="control-row">
+                <button id="startSpeakingBtn" class="btn">Start Speaking</button>
+                <button id="nextQuestionBtn" class="btn secondary" disabled>Next Question</button>
+                <button id="finishInterviewBtn" class="btn accent hidden" disabled>Finish Interview</button>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    window.INTERVIEW_CONFIG = {
+        startSessionUrl: "{{ url_for('start_session') }}",
+        uploadResponseUrl: "{{ url_for('upload_response') }}",
+        finishInterviewUrl: "{{ url_for('finish_interview') }}",
+        reportPagePrefix: "{{ url_for('report_page', session_id='__SESSION__') }}",
+        socketNamespace: "/socket",
+        maxQuestions: 10,
+        questionDurationSeconds: 120,
+    };
+</script>
+<script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+<script src="{{ url_for('static', filename='js/interview.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero section">
+    <div class="hero-background"></div>
+    <div class="hero-content glass reveal">
+        <p class="eyebrow">Multi-Modal AI Career Coaching</p>
+        <h1>InterviewIQ</h1>
+        <p class="hero-tagline">
+            Build elite interview presence with one guided experience that analyzes your spoken answers,
+            emotional signals, and delivery clarity in real time.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('interview_page') }}" class="btn hero-cta">Launch Smart Mock Interview</a>
+            <a href="#how-it-works" class="btn secondary">See the Process</a>
+        </div>
+        <div class="hero-metrics">
+            <article>
+                <strong>10</strong>
+                <span>Question Adaptive Flow</span>
+            </article>
+            <article>
+                <strong>3</strong>
+                <span>Signals per Response</span>
+            </article>
+            <article>
+                <strong>1</strong>
+                <span>Unified Report Card</span>
+            </article>
+        </div>
+    </div>
+
+    <div class="hero-visual reveal" aria-hidden="true">
+        <div class="dashboard-preview">
+            <div class="preview-row">
+                <div class="preview-pill">Live Transcription</div>
+                <div class="preview-pill">Emotion Streaming</div>
+                <div class="preview-pill">Confidence Scoring</div>
+            </div>
+            <div class="preview-row">
+                <article class="preview-card">
+                    <strong>87</strong>
+                    <span>Clarity Index</span>
+                </article>
+                <article class="preview-card">
+                    <strong>Positive</strong>
+                    <span>Sentiment Trend</span>
+                </article>
+                <article class="preview-card">
+                    <strong>Low</strong>
+                    <span>Stress Profile</span>
+                </article>
+            </div>
+            <div class="preview-wave"></div>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="section features-section">
+    <div class="section-header reveal">
+        <h2>Designed For Serious Interview Readiness</h2>
+        <p>
+            InterviewIQ blends speech intelligence, sentiment analysis, and visual emotion cues into one training loop
+            so you can practice with data, not guesswork.
+        </p>
+    </div>
+    <div class="feature-grid">
+        <article class="feature-card glass reveal">
+            <div class="feature-icon">01</div>
+            <h3>Precision Transcription</h3>
+            <p>
+                Whisper captures every response with strong fidelity so your coaching is anchored to exact wording,
+                pacing, and thought structure.
+            </p>
+        </article>
+        <article class="feature-card glass reveal">
+            <div class="feature-icon">02</div>
+            <h3>Visual Emotion Tracking</h3>
+            <p>
+                DeepFace and OpenCV monitor composure shifts and stress spikes over time, helping you train your on-camera presence.
+            </p>
+        </article>
+        <article class="feature-card glass reveal">
+            <div class="feature-icon">03</div>
+            <h3>Actionable Coaching Engine</h3>
+            <p>
+                Sentiment scoring and interview logic turn raw signals into clear, practical recommendations you can apply immediately.
+            </p>
+        </article>
+    </div>
+
+    <div class="experience-strip glass reveal">
+        <div>
+            <h3>One Focused Session. One Complete Performance Story.</h3>
+            <p>Practice in a realistic interview environment and leave with a high-signal report to sharpen your next attempt.</p>
+        </div>
+        <a href="{{ url_for('interview_page') }}" class="btn">Start Your Session</a>
+    </div>
+</section>
+
+<section id="how-it-works" class="section steps-section">
+    <div class="section-header reveal">
+        <h2>How the Training Flow Works</h2>
+    </div>
+    <div class="steps-grid">
+        <div class="step glass reveal">
+            <span>01</span>
+            <h3>Start Session</h3>
+            <p>Launch a guided 10-question sequence built from practical interview categories and coaching intent.</p>
+        </div>
+        <div class="step glass reveal">
+            <span>02</span>
+            <h3>Record Answers</h3>
+            <p>Respond naturally while webcam and microphone streams capture delivery quality and visible confidence cues.</p>
+        </div>
+        <div class="step glass reveal">
+            <span>03</span>
+            <h3>Analyze Signals</h3>
+            <p>Process transcript, sentiment, and emotion trends to quantify confidence, fluency, and stress profile.</p>
+        </div>
+        <div class="step glass reveal">
+            <span>04</span>
+            <h3>Review Report</h3>
+            <p>Receive an interactive report with charts, per-question drill-down, and targeted improvement tactics.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="badge-row">
+        <span class="tech-badge">Flask</span>
+        <span class="tech-badge">Socket.IO</span>
+        <span class="tech-badge">Whisper</span>
+        <span class="tech-badge">DeepFace</span>
+        <span class="tech-badge">Transformers</span>
+        <span class="tech-badge">Chart.js</span>
+    </div>
+    <p>InterviewIQ • Professional AI Interview Coaching</p>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+            const targetId = link.getAttribute("href");
+            if (!targetId || targetId === "#") {
+                return;
+            }
+            const target = document.querySelector(targetId);
+            if (!target) {
+                return;
+            }
+            event.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("reveal-visible");
+                }
+            });
+        },
+        { threshold: 0.2 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+</script>
+{% endblock %}

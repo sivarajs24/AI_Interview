@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<section class="report-page section">
+    <div class="report-header glass">
+        <div>
+            <p class="eyebrow">Interview Report Card</p>
+            <h1>Performance Summary</h1>
+            <p id="reportMeta">Analyzing session...</p>
+        </div>
+        <div class="report-actions">
+            <button id="downloadReportBtn" class="btn">Download Report</button>
+            <a href="{{ url_for('interview_page') }}" class="btn secondary">Retake Interview</a>
+        </div>
+    </div>
+
+    <div class="scores-grid">
+        <article class="score-card glass">
+            <h3>Confidence</h3>
+            <div id="confidenceRing" class="progress-ring" data-score="0">
+                <span id="confidenceScore">0</span>
+            </div>
+            <p class="mini-label">Delivery stability and conviction signal</p>
+        </article>
+        <article class="score-card glass">
+            <h3>Sentiment</h3>
+            <div id="sentimentRing" class="progress-ring" data-score="0">
+                <span id="sentimentScore">0</span>
+            </div>
+            <p class="mini-label">Positive framing and communication tone</p>
+        </article>
+        <article class="score-card glass">
+            <h3>Stress</h3>
+            <div id="stressRing" class="progress-ring stress" data-score="0">
+                <span id="stressScore">0</span>
+            </div>
+            <p class="mini-label">Lower values indicate better composure</p>
+        </article>
+    </div>
+
+    <div class="charts-grid">
+        <article class="chart-card glass">
+            <h3>Core Skill Radar</h3>
+            <p class="mini-label">Multi-factor snapshot of your strongest and weakest dimensions</p>
+            <canvas id="radarChart"></canvas>
+        </article>
+        <article class="chart-card glass">
+            <h3>Emotion Timeline</h3>
+            <p class="mini-label">How your visible emotional state shifted across questions</p>
+            <canvas id="timelineChart"></canvas>
+        </article>
+    </div>
+
+    <section class="report-section glass">
+        <h2>Per-Question Breakdown</h2>
+        <div id="questionAccordion" class="accordion"></div>
+    </section>
+
+    <section class="report-section glass">
+        <h2>Actionable Suggestions</h2>
+        <div id="suggestionsList" class="suggestions-grid"></div>
+    </section>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    window.REPORT_CONFIG = {
+        sessionId: "{{ session_id }}",
+        reportApiUrl: "{{ url_for('get_report', session_id=session_id) }}",
+        downloadUrl: "{{ url_for('download_report_pdf', session_id=session_id) }}",
+    };
+</script>
+<script src="{{ url_for('static', filename='js/report.js', v='20260427-timeline-fix3') }}"></script>
+{% endblock %}

@@ -1,0 +1,14 @@
+flask==3.0.0
+flask-socketio==5.3.6
+flask-cors==4.0.0
+openai-whisper==20231117
+transformers==4.36.0
+torch==2.1.0
+deepface==0.0.79
+opencv-python==4.8.1.78
+numpy==1.24.4
+librosa==0.10.1
+Pillow==10.1.0
+eventlet==0.33.3
+python-dotenv==1.0.0
+reportlab==4.0.7
